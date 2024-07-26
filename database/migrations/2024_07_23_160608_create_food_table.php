@@ -13,13 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->longText('description');
+            $table->timestamps();
+        });
         Schema::create('food', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('count');
             $table->longText('description');
             $table->timestamps();
+            //khoa ngoai
+            $table->unsignedInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
+       
     }
 
     /**

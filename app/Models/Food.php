@@ -20,4 +20,8 @@ class Food extends Model
         'description',
         'count',
     ];
+    public function category()
+    {
+        return $this -> belongsTo(Category::class);
+    }
 }
