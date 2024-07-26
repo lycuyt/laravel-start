@@ -2,8 +2,10 @@
 
 @section('content')
     <h1>This is Foods Create</h1>
-    <form action="/foods" method="post">
+    <form action="/foods" method="post" enctype="multipart/form-data">
         @csrf
+        <input class="form-control" 
+            type="file" name="image" >
         <input 
             type="text" 
             class="form-control" 

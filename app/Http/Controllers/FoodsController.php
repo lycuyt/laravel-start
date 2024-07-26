@@ -43,10 +43,28 @@ class FoodsController extends Controller
         // $food->name = $request->input('name');
         // $food->description = $request->input('description');
         // $food->count = $request->input('count');
+
+        // dd($request->all());
+        // dd($request->file('image')->isValid());
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'count' => 'required|integer|min:0|max:200',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+        ]);
+
+        $generatedImageName = 'image'.time().'-'
+                                .$request->name.'.'
+                                .$request->image->extension();
+        //move to a folder
+        $request->image->move(public_path('images'),$generatedImageName);
+        // dd($generatedImageName);
         $food = Food::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'count' => $request->input('count'),
+            'category_id' => 1,
+            'image_path' => $generatedImageName,
         ]);
 
         $food->save();

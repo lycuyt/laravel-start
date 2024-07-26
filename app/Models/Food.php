@@ -18,6 +18,8 @@ class Food extends Model
     protected $fillable = [
         'name',
         'description',
+        'image_path',
+        'category_id',
         'count',
     ];
     public function category()
